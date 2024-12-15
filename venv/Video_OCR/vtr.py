@@ -31,8 +31,6 @@ def correct_text(text):
     return ''.join(corrected_text)
 
 def extract_number_plate(video_path, output_file=None):
-    print(f"Absolute path: {os.path.abspath(video_path)}")
-    print(f"File exists: {os.path.exists(video_path)}")
 
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
@@ -45,11 +43,11 @@ def extract_number_plate(video_path, output_file=None):
     while True:
         ret, frame = cap.read()
         if not ret:
-            print("No more frames to process.")
+            # print("No more frames to process.")
             break
 
         frame_count += 1
-        print(f"Processing Frame {frame_count}...")
+        # print(f"Processing Frame {frame_count}...")
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
