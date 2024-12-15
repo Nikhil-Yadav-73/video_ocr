@@ -32,7 +32,6 @@ def extract_number_plate(video_path, output_file=None):
         config = '--psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
         text = pytesseract.image_to_string(thresh, config=config).strip()
 
-        # Filter for possible number plates (10-11 alphanumeric characters)
         if 9 <= len(text) <= 11 and text.isalnum():
             print(f"Valid text detected in Frame {frame_count}: {text}")
             detected_texts.append(text)
@@ -40,7 +39,6 @@ def extract_number_plate(video_path, output_file=None):
     cap.release()
 
     if detected_texts:
-        # Count the frequency of each detected text
         text_counts = Counter(detected_texts)
         most_common_text, _ = text_counts.most_common(1)[0]
 
@@ -53,6 +51,5 @@ def extract_number_plate(video_path, output_file=None):
     else:
         print("No valid number plates detected.")
 
-# Example usage
-video_path = r'C:\Users\Nikhil\Desktop\VIDEO_OCR\venv\Video_OCR\vid3.mp4'
+video_path = r'C:\Users\Nikhil\Desktop\VIDEO_OCR\venv\Video_OCR\vid1.mp4'
 extract_number_plate(video_path, output_file='detected_number_plate.txt')
